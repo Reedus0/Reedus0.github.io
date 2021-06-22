@@ -3,12 +3,69 @@ header__inner = document.querySelector('.header__inner ');
 burger = document.querySelector('.burger-header__burger');
 input = document.querySelector('.footer-form__file');
 header = document.querySelector('.header');
-callbackPopup1 = document.getElementById('callback1');
-callbackPopup2 = document.getElementById('callback2');
+popupLinks = document.querySelectorAll('.popup-link')
+popupCloseLinks = document.querySelectorAll('.popup-close')
+navButtons = document.querySelector(".scroll-buttons")
 body = document.body;
+
+function doScrolling(elementY, duration) { 
+    var startingY = window.pageYOffset;
+    var diff = elementY - startingY;
+    var start;
+  
+    window.requestAnimationFrame(function step(timestamp) {
+        if (!start) start = timestamp;
+
+        var time = timestamp - start;
+
+        var percent = Math.min(time / duration, 1);
+  
+        window.scrollTo(0, startingY + diff * percent);
+  
+        if (time < duration) {
+            window.requestAnimationFrame(step);
+        }
+    })
+}
+function format(){
+    let i= 0;
+    while(i < 4){
+        i++;
+        var element = document.getElementById(i);
+        try{
+            element.classList.remove("_active");
+        }
+        catch{
+       
+        }
+    }
+}
+
 
 window.onload = function(){
     document.addEventListener("click", documentActions);
+    document.addEventListener("scroll", function(){
+        if(pageYOffset > 0){
+            element = document.getElementById(1);
+            format()
+            element.classList.toggle("_active")
+        }
+        if(pageYOffset > document.querySelector('.intro').offsetHeight - 150){
+            element = document.getElementById(2);
+            format()
+            element.classList.toggle("_active")
+        }
+        if(pageYOffset > document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight - 50){
+            element = document.getElementById(3);
+            format()
+            element.classList.toggle("_active")
+        }
+        if(pageYOffset > document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.projects').offsetHeight - 50){
+            element = document.getElementById(4);
+            format()
+            element.classList.toggle("_active")
+        }
+    })
 
     function documentActions(e){
         const targetElement = e.target;
@@ -27,33 +84,27 @@ window.onload = function(){
                 targetElement.value = input.files[0].name
             }
             // File upload func
-        }
-        if(targetElement.classList.contains('header__button') || targetElement.classList.contains('callback__close')){
-                header__inner.classList.toggle('_popup');
-                callbackPopup1.classList.toggle('_open');
-                body.classList.toggle('_menu');
-                document.addEventListener("click", popups);        
-        }
-        if(targetElement.classList.contains('callback__close2')){
-                header__inner.classList.toggle('_popup');
-                callbackPopup2.classList.remove('_open');
-                body.classList.toggle('_menu');
-                document.addEventListener("click", popups);        
-        }
-    }
-
-    function popups(e){
-        const targetElement = e.target;
-        if(targetElement.classList.contains('callback__inner')){
-                header__inner.classList.remove('_popup');
-                callbackPopup1.classList.remove('_open');
-                callbackPopup2.classList.remove('_open');
-                body.classList.remove('_menu');
-                document.removeEventListener("click", popups);
-            
+        }    
+        if(targetElement.classList.contains("scroll-buttons__button")){
+            if(targetElement.id == 1){
+                doScrolling(0, 500)
+            }
+            if(targetElement.id == 2){
+                doScrolling(document.querySelector('.intro').offsetHeight - 50, 500)
+                
+            }
+            if(targetElement.id == 3){
+                doScrolling(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + 80, 500)
+            }
+            if(targetElement.id == 4){
+                doScrolling(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.projects').offsetHeight - 10, 500)
+            }
 
         }
-        
+        //scrollToCords(0)
+        //scrollToCords(document.querySelector('.intro').offsetHeight - 50)
+        //scrollToCords(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight - 50)
+        //scrollToCords(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.projects').offsetHeight - 10)
     }
 
     const callback = function (entries, observer) {
@@ -70,19 +121,133 @@ window.onload = function(){
 
 function changeText(value) {
     targetEl = event.target
-    targetEl.value = value;   
+    if(targetEl.value == ""){
+        targetEl.value = value;   
+    }
 }
 
-function submit_form(){
+if(popupLinks.length > 0) {
+    for(let i = 0; i < popupLinks.length; i++) {
+        const popupLink = popupLinks[i];
+        popupLink.addEventListener("click" , function(e){
+            const popupName = popupLink.getAttribute('href').replace("#", "");
+            const curentPopup = document.getElementById(popupName);
+            popupOpen(curentPopup);
+            popupLink.preventDefault();
+        })
+    }
+}
 
-    form1 = document.getElementById("callback1")
-    form2 = document.getElementById("callback2")
-    form1.classList.remove('_open');
-    form2.classList.add('_open');
-     
+if(popupCloseLinks.length > 0) {
+    for(let i = 0; i < popupCloseLinks.length; i++) {
+        const popupLink = popupCloseLinks[i];
+        popupLink.addEventListener("click" , function(e){
+            popupClose(popupLink.closest('.popup'), true);
+            popupLink.preventDefault();
+        })
+    }
+}
+
+function popupOpen(curentPopup) {
+    header__inner.classList.add('_popup');
+    navButtons.classList.add('_popup');
+    curentPopup.classList.add('_open');
+    body.classList.add('_menu');
+
+    curentPopup.addEventListener("click", function(e){
+        if(e.target.classList.contains('popup__inner')){
+            popupClose(curentPopup, true)
+        }
+    })
+}
+
+function popupClose(curentPopup, doUnlock){
+    curentPopup.classList.remove("_open");
+    if(doUnlock){
+        header__inner.classList.remove('_popup');
+        navButtons.classList.remove('_popup');
+        body.classList.remove('_menu');
+    }
     
 }
 
+
+
+
+function checkValidReq(input, Placeholder){
+    if(input.value == ""){
+        input.classList.add("_invalid");
+        input.placeholder = "Заполните поле";
+        return false;
+    }
+    else {
+        input.classList.remove("_invalid");
+        input.placeholder = Placeholder;
+        return true;
+    };
+}
+
+function checkValidPhone(input, Placeholder){
+    let pattern = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    if(!pattern.test(input.value)){
+        input.classList.add("_invalid");
+        input.value = "";
+        input.placeholder = "Неверный формат";
+        return false;
+    }
+    else {
+        input.placeholder = Placeholder;
+        input.classList.remove("_invalid");
+        return true;
+    };
+}
+
+
+
+function footer_submit_form(){
+
+
+    const name = document.querySelector('.footer-form__name');
+    const checkbox = document.querySelector('.footer-form__checkbox');
+    const tel = document.querySelector('.footer-form__tel');
+
+    nameVal = checkValidReq(name, "Ваше имя");
+    telVal = checkValidPhone(tel, "+7 (___) ___-__-__");
+
+
+    if(nameVal && telVal){
+        const Popup1 = document.getElementById("callback");
+        const Popup2 = document.getElementById("callback-done");
+        popupClose(Popup1, false);
+        popupOpen(Popup2);
+        name.value = "";
+        tel.value = "";
+        checkbox.checked = false;
+        return true;
+    }
+}
+
+function popup_submit_form(){
+
+    const name = document.querySelector('.form-callback__name');
+    const checkbox = document.querySelector('.form-callback__checkbox');
+    const tel = document.querySelector('.form-callback__tel');
+
+    nameVal = checkValidReq(name, "Ваше имя");
+    telVal = checkValidPhone(tel, "+7 (___) ___-__-__");
+
+
+    if(nameVal && telVal){
+        const Popup1 = document.getElementById("callback");
+        const Popup2 = document.getElementById("callback-done");
+        popupClose(Popup1, false);
+        popupOpen(Popup2);
+        name.value = "";
+        tel.value = "";
+        checkbox.checked = false;
+        return true;
+    }
+}
 
 
 

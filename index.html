@@ -8,8 +8,13 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <header class="header">
+    <div class="scroll-buttons">
+    <button class="scroll-buttons__button _active" id="1">.</button>
+    <button class="scroll-buttons__button" id="2">.</button>
+    <button class="scroll-buttons__button" id="3">.</button>
+    <button class="scroll-buttons__button" id="4">.</button>
+</div>
+    <header class="header" >
 
         <div class="header__inner">
             <div class="header__burger burger-header">
@@ -37,14 +42,14 @@
             </div>
             <div class="header__items">
                 <h3 class="header__phone"><span class="header__phone-color">+7 (812)</span> 401-64-95</h3>
-                <button class="btn header__button header__button-desktop"><span class="_icon--phone"></span>Обратный звонок</button>
-                <button class="btn _icon--phone header__button header__button-mobile"></button>
+                <a href="#callback" class="btn popup-link header__button-desktop"><span class="_icon--phone"></span>Обратный звонок</a>
+                <a href="#callback" class="btn _icon--phone popup-link header__button-mobile"></a>
             </div>
         </div>
 
 </header>
     <main class="main">
-        <div class="intro">
+        <div class="intro" id="intro">
             <div class="container">
                 <div class="intro__inner">
                     <div class="intro__info">
@@ -285,15 +290,15 @@
                 <div class="footer-text__form footer-form">
                     <h1 class="footer-form__title">Свяжитесь с нами</h1>
                     <h2 class="footer-form__subtitle">Задайте вопрос, пришлите коммерческое предложение или пригласите на тендер</h2>
-                    <form class="footer-form__form">
+                    <form class="footer-form__form" onsubmit="footer_submit_form();return false">
                         <div class="footer-form__grid footer-grid">
                             <div class="footer-grid__element">
                                 <h3 class="footer-form__text">Представьтесь, пожалуйста*</h3>
-                                <input class="footer-form__input" type="text" placeholder="Ваше имя">
+                                <input class="footer-form__input footer-form__name" type="text" placeholder="Ваше имя">
                             </div>
                             <div class="footer-grid__element">
                                 <h3 class="footer-form__text">Ваш телефон</h3>
-                                <input class="footer-form__input footer-form__tel" type="tel" pattern="+7[0-9]{3}-[0-9]{3}" placeholder="+7 (___) ___-__-__" onclick="changeText('+7')">
+                                <input class="footer-form__input footer-form__tel" type="tel" placeholder="+7 (___) ___-__-__" onclick="changeText('+7')">
                             </div>
                             <div class="footer-grid__element footer-grid__file">
                                 <input class="footer-form__input footer-form__file" placeholder="Прикрепить файл" type="file">
@@ -301,7 +306,7 @@
                             </div>
                             <div class="footer-grid__element"><input class="footer-form__submit btn" type="submit" value="Перезвоните мне"></div>
                             <div class="footer-grid__element footer-grid__checkbox">
-                                <input class="footer-form__checkbox" type="checkbox">
+                                <input class="footer-form__checkbox" type="checkbox" required>
                                 <h3 class="footer-grid__policy">Я соглашаюсь с <span>политикой конфиденциальности</span></h3>
                             </div>
                         </div>
@@ -316,23 +321,23 @@
 </footer>
     
 
-<div class="callback popup" id="callback1">
-    <div class="callback__inner">
-        <div class="callback__content">
-            <button class="btn_x callback__close">&#10006;</button>
+<div class="callback popup" id="callback">
+    <div class="callback__inner popup__inner">
+        <div class="callback__content popup__content">
+            <button class="btn_x callback__close popup-close">&#10006;</button>
             <h1 class="callback__title">Заказать обратный звонок</h1>
-            <form class="callback__form form-callback" onsubmit="submit_form();return false">
+            <form class="callback__form form-callback" onsubmit="popup_submit_form();return false">
                 <div class="form-callback__grid">
                     <div class="form-callback__element">
                         <h3 class="form-callback__text">Представьтесь, пожалуйста*</h3>
-                        <input class="form-callback__input" type="text" placeholder="Ваше имя">
+                        <input class="form-callback__input form-callback__name" type="text" placeholder="Ваше имя">
                     </div>
                     <div class="form-callback__element">
                         <h3 class="form-callback__text">Ваш телефон</h3>
                         <input class="form-callback__input form-callback__tel" type="tel" pattern="+7[0-9]{3}-[0-9]{3}" placeholder="+7 (___) ___-__-__" onclick="changeText('+7')">
                     </div>
                     <div class="form-callback__element form-callback__checkbox-element">
-                        <input class="form-callback__checkbox" type="checkbox">
+                        <input class="form-callback__checkbox" type="checkbox" required>
                         <h3 class="form-callback__policy">Я соглашаюсь с <span>политикой конфиденциальности</span></h3>
                     </div>
                     <div class="form-callback__element"><input class="form-callback__submit btn" type="submit" value="Перезвоните мне"></div>
@@ -343,11 +348,11 @@
     </div>
 </div>
 
-<div class="callback popup" id="callback2">
-    <div class="callback__inner">
-        <div class="callback__content2">
-            <button class="btn_x callback__close2">&#10006;</button>
-            <h1 class="callback__title">Спасибо ваша заявка принята</h1>
+<div class="callback-submit popup" id="callback-done">
+    <div class="callback-submit__inner popup__inner">
+        <div class="callback-submit__content">
+            <button class="btn_x callback-submit__close popup-close">&#10006;</button>
+            <h1 class="callback-submit__title">Спасибо ваша заявка принята</h1>
         </div>
     </div>
 </div>
