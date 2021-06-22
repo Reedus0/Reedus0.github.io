@@ -2,6 +2,9 @@ menu = document.querySelector('.burger-header__menu');
 header__inner = document.querySelector('.header__inner ');
 burger = document.querySelector('.burger-header__burger');
 input = document.querySelector('.footer-form__file');
+header = document.querySelector('.header');
+callbackPopup1 = document.getElementById('callback1');
+callbackPopup2 = document.getElementById('callback2');
 body = document.body;
 
 window.onload = function(){
@@ -25,8 +28,33 @@ window.onload = function(){
             }
             // File upload func
         }
+        if(targetElement.classList.contains('header__button') || targetElement.classList.contains('callback__close')){
+                header__inner.classList.toggle('_popup');
+                callbackPopup1.classList.toggle('_open');
+                body.classList.toggle('_menu');
+                document.addEventListener("click", popups);        
+        }
+        if(targetElement.classList.contains('callback__close2')){
+                header__inner.classList.toggle('_popup');
+                callbackPopup2.classList.remove('_open');
+                body.classList.toggle('_menu');
+                document.addEventListener("click", popups);        
+        }
     }
-    const header = document.querySelector('.header');
+
+    function popups(e){
+        const targetElement = e.target;
+        if(targetElement.classList.contains('callback__inner')){
+                header__inner.classList.remove('_popup');
+                callbackPopup1.classList.remove('_open');
+                callbackPopup2.classList.remove('_open');
+                body.classList.remove('_menu');
+                document.removeEventListener("click", popups);
+            
+
+        }
+        
+    }
 
     const callback = function (entries, observer) {
         if(entries[0].isIntersecting){
@@ -41,7 +69,18 @@ window.onload = function(){
 }
 
 function changeText(value) {
-    document.querySelector('.footer-form__tel').value = value;   
+    targetEl = event.target
+    targetEl.value = value;   
+}
+
+function submit_form(){
+
+    form1 = document.getElementById("callback1")
+    form2 = document.getElementById("callback2")
+    form1.classList.remove('_open');
+    form2.classList.add('_open');
+     
+    
 }
 
 

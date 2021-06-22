@@ -9,6 +9,7 @@
 }
 
 .header__inner {
+  top: 0;
   z-index: 1000;
   -webkit-transition: all 0.3s ease 0.1s;
   -o-transition: all 0.3s ease 0.1s;
@@ -33,6 +34,13 @@
 
 .header__inner._menu {
   background-color: #151515;
+}
+
+.header__inner._popup {
+  -webkit-transition: all 0.3s ease 0.1s;
+  -o-transition: all 0.3s ease 0.1s;
+  transition: all 0.3s ease 0.1s;
+  top: -100%;
 }
 
 .header__burger {
@@ -1261,6 +1269,176 @@ button.swiper-pagination-bullet {
   backface-visibility: hidden;
 }
 
+.popup {
+  -webkit-transition: all 0.3s ease 0.1s;
+  -o-transition: all 0.3s ease 0.1s;
+  transition: all 0.3s ease 0.1s;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.popup._open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.callback__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.callback__content {
+  background: #000000;
+  height: 600px;
+  width: 417px;
+  position: relative;
+  padding: 30px 0 100px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.callback__content2 {
+  background: #000000;
+  height: 100px;
+  width: 417px;
+  position: relative;
+  padding: 30px 0 100px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.callback__close {
+  color: #E4B564;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 30px;
+}
+
+.callback__close2 {
+  color: #E4B564;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 30px;
+}
+
+.callback__title {
+  margin-top: 52px;
+  font-family: "GilamBold";
+  font-size: 20px;
+  line-height: 17px;
+}
+
+.form-callback {
+  margin-top: 30px;
+}
+
+.form-callback__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.form-callback__text {
+  font-family: "GilamLight";
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.form-callback__input {
+  color: white;
+  padding: 27px 6% 27px 3%;
+  background: #292929;
+  border: none;
+  width: 91%;
+}
+
+.form-callback__input::-webkit-input-placeholder {
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}
+
+.form-callback__input::-moz-placeholder {
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}
+
+.form-callback__input:-ms-input-placeholder {
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}
+
+.form-callback__input::-ms-input-placeholder {
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}
+
+.form-callback__input::placeholder {
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}
+
+.form-callback__checkbox {
+  width: 25px;
+  height: 25px;
+}
+
+.form-callback__submit {
+  width: 100%;
+  padding: 7px 40px;
+  font-size: 16px;
+  line-height: 53px;
+  color: #E4B564;
+}
+
+.form-callback__element:not(:last-child) {
+  margin-bottom: 26px;
+}
+
+.form-callback__policy {
+  font-family: "GilamLight";
+  font-size: 16px;
+  margin: 0 15px;
+}
+
+.form-callback__policy span {
+  text-decoration: underline;
+}
+
+.form-callback__checkbox-element {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 60px;
+}
+
 body,
 html,
 h1,
@@ -1770,6 +1948,38 @@ div::-webkit-scrollbar {
 @media (max-width: 1420px) {
   .footer__title {
     margin-bottom: calc(1px + 49 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__content {
+    padding-left: calc(10px + 90 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__content {
+    padding-right: calc(10px + 90 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__content2 {
+    padding-left: calc(10px + 90 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__content2 {
+    padding-right: calc(10px + 90 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__close {
+    top: calc(10px + 20 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__close {
+    right: calc(10px + 20 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__close2 {
+    top: calc(10px + 20 * ((100vw - 320px) / 1170 -320));
+  }
+
+  .callback__close2 {
+    right: calc(10px + 20 * ((100vw - 320px) / 1170 -320));
   }
 
   .intro {
