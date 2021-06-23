@@ -94,17 +94,13 @@ window.onload = function(){
                 
             }
             if(targetElement.id == 3){
-                doScrolling(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + 80, 500)
+                doScrolling(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight , 500)
             }
             if(targetElement.id == 4){
                 doScrolling(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.projects').offsetHeight - 10, 500)
             }
 
         }
-        //scrollToCords(0)
-        //scrollToCords(document.querySelector('.intro').offsetHeight - 50)
-        //scrollToCords(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight - 50)
-        //scrollToCords(document.querySelector('.warranty').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.projects').offsetHeight - 10)
     }
 
     const callback = function (entries, observer) {
