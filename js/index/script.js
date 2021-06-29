@@ -23,11 +23,46 @@ Array.from(spoilers).forEach(spoiler => {
 	spoiler.setAttribute("data-spoiler-initialized", "");
 });
 
+function doScrolling(elementY, duration) { 
+    var startingY = window.pageYOffset;
+    var diff = elementY - startingY;
+    var start;
+  
+    window.requestAnimationFrame(function step(timestamp) {
+        if (!start) start = timestamp;
+
+        var time = timestamp - start;
+
+        var percent = Math.min(time / duration, 1);
+  
+        window.scrollTo(0, startingY + diff * percent);
+  
+        if (time < duration) {
+            window.requestAnimationFrame(step);
+        }
+    })
+}
+function format(){
+    let i= 0;
+    while(i < 6){
+        i++;
+        var element = document.getElementById(i);
+        try{
+            element.classList.remove("_active");
+        }
+        catch{
+       
+        }
+    }
+}
+
+
+
+
 
 
 window.onload = function(){
     list = false
-    
 
     document.addEventListener("click", documentActions);
     document.addEventListener("scroll", function(){
@@ -47,8 +82,46 @@ window.onload = function(){
                 list = true;
                 outNum(143, 2500, ".flex-text__title-built");
                 outNum(24, 2500, ".flex-text__title-building");
+                icons = document.querySelectorAll('.map-flex__item')
+                for(let i = 0; i < icons.length; i++){
+                    setTimeout(function(){
+                        icon = icons[i];
+                        console.log(icon)
+                        icon.classList.add("_active"); 
+                    
+                    }, i * 150);
             }
-
+            }
+        }
+        if(pageYOffset > 0){
+            element = document.getElementById(1);
+            format()
+            element.classList.toggle("_active")
+        }
+        if(pageYOffset > document.querySelector('.intro').offsetHeight - 150){
+            element = document.getElementById(2);
+            format()
+            element.classList.toggle("_active")
+        } 
+        if(pageYOffset > document.querySelector('.directions').offsetHeight + document.querySelector('.intro').offsetHeight - 50){
+            element = document.getElementById(3);
+            format()
+            element.classList.toggle("_active")
+        }
+        if(pageYOffset > document.querySelector('.partners').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.directions').offsetHeight - 50){
+            element = document.getElementById(4);
+            format()
+            element.classList.toggle("_active")
+        }
+        if(pageYOffset > document.querySelector('.partners').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.directions').offsetHeight + document.querySelector('.stats').offsetHeight - 50){
+            element = document.getElementById(5);
+            format()
+            element.classList.add("_active")
+        }
+        if(pageYOffset > document.querySelector('.partners').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.directions').offsetHeight + document.querySelector('.stats').offsetHeight + document.querySelector('.news').offsetHeight - 50){
+            element = document.getElementById(6);
+            format()
+            element.classList.add("_active")
         }
     });
 
@@ -61,6 +134,26 @@ window.onload = function(){
             menu = document.querySelector(".nav-header")
             menu.classList.toggle("_active")
             header.classList.toggle('_menu')
+        }
+        if(targetElement.classList.contains("scroll-buttons__button")){
+            if(targetElement.id == 1){
+                doScrolling(0, 500)
+            }
+            if(targetElement.id == 2){
+                doScrolling(document.querySelector('.intro').offsetHeight - 50, 500)
+            }
+            if(targetElement.id == 3){
+                doScrolling(document.querySelector('.directions').offsetHeight + document.querySelector('.intro').offsetHeight , 500)
+            }
+            if(targetElement.id == 4){
+                doScrolling(document.querySelector('.partners').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.directions').offsetHeight + 50, 500)
+            }
+            if(targetElement.id == 5){
+                doScrolling(document.querySelector('.partners').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.directions').offsetHeight + document.querySelector('.stats').offsetHeight + 50, 500)
+            }
+            if(targetElement.id == 6){
+                doScrolling(document.querySelector('.partners').offsetHeight + document.querySelector('.intro').offsetHeight + document.querySelector('.directions').offsetHeight + document.querySelector('.stats').offsetHeight + document.querySelector('.news').offsetHeight + 50, 500)
+            }
         }
     }
 }
@@ -260,5 +353,18 @@ const swiper3 = new Swiper('.stats-carousel', {
 
   });
 
+  const swiper4 = new Swiper('.carousel-about', {
+
+    direction: 'horizontal',
+    loop: true,
+    slidesPerView: 1,
+
+
+    navigation: {
+      nextEl: '.text-about__button-next',
+      prevEl: '.text-about__button-prev',
+    },
+
+  });
 
 
