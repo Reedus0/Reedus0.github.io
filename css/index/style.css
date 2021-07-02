@@ -1517,10 +1517,20 @@ body._menu {
 .intro {
   position: relative;
   z-index: 11;
-  background: url("../../img/index/intro.png") no-repeat top;
   background-size: cover;
   height: auto;
   padding-bottom: 50px;
+}
+
+.intro__bg {
+  z-index: -1;
+  -webkit-filter: brightness(40%);
+  filter: brightness(40%);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .intro__title {
@@ -1989,7 +1999,7 @@ body._menu {
 
 .map-flex #map-flex14 {
   top: 60%;
-  left: 80%;
+  left: 85%;
 }
 
 .map-flex #map-flex15 {
@@ -1999,7 +2009,7 @@ body._menu {
 
 .map-flex #map-flex16 {
   top: 10%;
-  left: 80%;
+  left: 85%;
 }
 
 .flex-text {
@@ -2323,6 +2333,7 @@ body._menu {
 .carousel-about {
   position: relative;
   margin-bottom: -4px;
+  width: 100%;
 }
 
 .carousel-about__slide img {
@@ -2343,7 +2354,7 @@ body._menu {
   padding-right: 50px;
   padding-top: 50px;
   padding-bottom: 50px;
-  margin-top: 10%;
+  margin-top: 5%;
   background: #FAFAFA;
 }
 
@@ -2476,6 +2487,17 @@ body._menu {
 @media (min-width: 1650px) {
   .scroll-buttons {
     right: 5%;
+  }
+}
+
+@media (min-width: 1720px) {
+  .carousel-about__slide img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .text-about__text {
+    max-width: 60%;
   }
 }
 
@@ -2706,6 +2728,14 @@ body._menu {
     height: auto;
     font-size: 20px;
     line-height: 24px;
+  }
+
+  .nav-header__link:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .nav-header__link_hiden {
+    display: block;
   }
 
   .nav-header__button {
