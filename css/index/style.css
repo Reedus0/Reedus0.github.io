@@ -1396,7 +1396,7 @@ button.swiper-pagination-bullet {
 }
 
 .scroll-buttons {
-  z-index: 10000;
+  z-index: 900;
   -webkit-transition: all 0.3s ease 0.1s;
   -o-transition: all 0.3s ease 0.1s;
   transition: all 0.3s ease 0.1s;
@@ -1689,7 +1689,7 @@ body._menu {
 .flex-directions__item {
   margin-top: 10px;
   position: relative;
-  z-index: 11;
+  z-index: 1000;
   height: auto;
   -webkit-transition: all 0.3s ease 0.1s;
   -o-transition: all 0.3s ease 0.1s;
