@@ -24,6 +24,7 @@ function ready(){
     if(innerWidth > 1420){
         body.style.padding = '0 17px 0 0';
     }
+    document.querySelector('.loading__content-logo').classList.add('_visible')
     setTimeout(function(){document.querySelector('.loading__content-logo').classList.remove('_visible')}, 1000) // 1
     setTimeout(function(){document.querySelector('.loading').classList.remove('_open')}, 2000) // 2
     setTimeout(function(){
@@ -35,7 +36,6 @@ function ready(){
 }
 
 
-document.addEventListener("DOMContentLoaded", ready);
 
 Array.from(spoilers).forEach(spoiler => {
   
@@ -76,6 +76,7 @@ function doScrolling(elementY, duration) {
 }
 
 window.onload = function(){
+    ready()
     document.addEventListener("click", documentActions);
 
     function documentActions(e){
