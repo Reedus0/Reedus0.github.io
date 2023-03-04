@@ -55,24 +55,8 @@ Array.from(spoilers).forEach(spoiler => {
 	spoiler.setAttribute("data-spoiler-initialized", "");
 });
 
-function doScrolling(elementY, duration) { 
-    var startingY = window.pageYOffset;
-    var diff = elementY - startingY;
-    var start;
-  
-    window.requestAnimationFrame(function step(timestamp) {
-        if (!start) start = timestamp;
-
-        var time = timestamp - start;
-
-        var percent = Math.min(time / duration, 1);
-  
-        window.scrollTo(0, startingY + diff * percent);
-  
-        if (time < duration) {
-            window.requestAnimationFrame(step);
-        }
-    })
+function doScrolling(elementY) { 
+    window.scrollTo({left: 0, top: elementY, behavior: 'smooth'});
 }
 
 window.onload = function(){
@@ -87,25 +71,25 @@ window.onload = function(){
             targetElement.closest('.burger-header').classList.toggle('_active');
         }
         if(targetElement.classList.contains('text-intro__button')){
-            doScrolling(window.innerHeight, 700)
+            doScrolling(window.innerHeight)
         }
         if(targetElement.id == "start"){
             body.classList.remove('_menu');
             document.querySelector('.header__wrapper').classList.remove('_active');
             document.querySelector('.burger-header').classList.remove('_active');
-            doScrolling(0, 700)
+            doScrolling(0)
         }
         if(targetElement.id == "works"){
             body.classList.remove('_menu');
             document.querySelector('.header__wrapper').classList.remove('_active');
             document.querySelector('.burger-header').classList.remove('_active');
-            doScrolling(window.innerHeight, 700)
+            doScrolling(window.innerHeight)
         }
         if(targetElement.id == "contact"){
             body.classList.remove('_menu');
             document.querySelector('.header__wrapper').classList.remove('_active');
             document.querySelector('.burger-header').classList.remove('_active');
-            doScrolling((document.body.scrollHeight - window.innerHeight - 80), 700)
+            doScrolling((document.body.scrollHeight - window.innerHeight - 80))
         }
     }
 	

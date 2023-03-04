@@ -472,6 +472,10 @@ body._menu {
 }
 
 .loading__content-logo {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -webkit-transition: all 1s ease 0s;
   -o-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
@@ -1300,11 +1304,6 @@ body {
   padding-bottom: 60px;
 }
 
-.works__slide {
-  cursor: pointer;
-  position: relative;
-}
-
 .works__bg {
   -webkit-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -1850,14 +1849,5 @@ body {
   .button:hover {
     background-color: white;
     color: black;
-  }
-
-  .works__slide:hover .works__icon {
-    opacity: 1;
-  }
-
-  .works__slide:hover .works__bg {
-    -webkit-filter: brightness(0.3);
-    filter: brightness(0.3);
   }
 }
