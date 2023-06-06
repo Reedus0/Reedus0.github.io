@@ -17,7 +17,7 @@ window.onload = function () {
 
 const downloadFile = () => {
     let anchor = document.createElement('a');
-    anchor.setAttribute('href', 'app/app-release.apk');
+    anchor.setAttribute('href', '/app/app-release.apk');
     anchor.setAttribute('download', '');
     document.body.appendChild(anchor);
     anchor.click();
